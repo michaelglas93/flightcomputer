@@ -7,7 +7,6 @@
     <title>Flugcomputer</title>
     <link rel="stylesheet" href="./styles.css">
     <script type="text/javascript" src="./index.js"></script>
-
 </head>
 
 <body>
@@ -21,8 +20,9 @@
             <input type="number" id="trueCourse">
             <label for="windDirection">Wind Direction</label>
             <input type="number" id="windDirection">
+            <label for="deviation">Deviation (°E/W):</label>
+            <input type="number" id="deviation" value="3">
             <input type="submit" value="Submit">
-
         </form>
 
         <div class="outputForm">
@@ -38,9 +38,11 @@
                 <label for="groundSpeedOutput">Groundspeed:</label>
                 <output id="groundSpeedOutput"></output>
             </div>
+            <div class="outputRow">
+                <label for="magneticHeadingOutput">Magnetic Heading:</label>
+                <output id="magneticHeadingOutput"></output>
+            </div>
         </div>
-
-
     </div>
 </body>
 

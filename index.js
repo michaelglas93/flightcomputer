@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const windSpeed = parseFloat(document.getElementById("windSpeed").value);
         const trueCourse = parseFloat(document.getElementById("trueCourse").value);
         const windDirection = parseFloat(document.getElementById("windDirection").value);
+        const deviation = parseFloat(document.getElementById("deviation").value); // New field for deviation
 
         // Convert degrees to radians
         const windDirectionRad = windDirection * (Math.PI / 180);
@@ -17,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let windCorrectionAngleRad = Math.asin((windSpeed * Math.sin(windDirectionRad - trueCourseRad)) / trueAirspeed);
         let windCorrectionAngle = (windCorrectionAngleRad * 180 / Math.PI).toFixed(2); // Convert to degrees
 
-        // Heading
+        // Heading (True Heading corrected for wind)
+        // Convert windCorrectionAngle back to a float before adding
         let heading = Math.round(trueCourse + parseFloat(windCorrectionAngle));
 
         // Ground Speed (Law of Cosines)
@@ -26,9 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
             (2 * trueAirspeed * windSpeed * Math.cos(windDirectionRad - trueCourseRad))
         ).toFixed(2);
 
+        // Calculate Magnetic Heading (MH)
+        // Assuming deviation is positive for East and negative for West,
+        // Magnetic Heading = Heading - Deviation
+        let magneticHeading = Math.round(heading - deviation);
+
         // Display results
         document.getElementById("windOutput").innerHTML = windCorrectionAngle;
         document.getElementById("headingOutput").innerHTML = heading;
         document.getElementById("groundSpeedOutput").innerHTML = groundSpeed;
+        document.getElementById("magneticHeadingOutput").innerHTML = magneticHeading;
     });
 });
